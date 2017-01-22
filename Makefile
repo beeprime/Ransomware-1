@@ -4,11 +4,11 @@ FLAGS = -std=c89 -ansi -pedantic
 
 
 main:
-	$(CC) $(DEBUG) $(FLAGS) main.c listdir.c -o sisyph
+	$(CC) $(DEBUG) $(FLAGS) src/main.c src/listdir.c -o bin/sisyph
 
 run:
-	./sisyph
+	./bin/sisyph
 
 
 clean:
-	rm -f sisyph
+	rm -f bin/sisyph
