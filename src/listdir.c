@@ -21,7 +21,10 @@ int is_dir(struct dirent *entry) {
 
 
 int is_inode(struct dirent *entry) {
-    return (!strncmp(entry->d_name, ".", 1) || !strncmp(entry->d_name, "..", 1));
+    return (
+        (!strncmp(entry->d_name, ".", 1) && strlen(entry->d_name) == 1) ||
+        (!strncmp(entry->d_name, "..", 2) && strlen(entry->d_name) == 2)
+    );
 }
 
 
