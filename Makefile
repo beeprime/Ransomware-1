@@ -4,6 +4,7 @@ FLAGS = -std=c89 -ansi -pedantic
 
 
 main:
+	mkdir -p bin
 	$(CC) $(DEBUG) $(FLAGS) src/main.c src/listdir.c -o bin/sisyph
 
 run:
@@ -11,4 +12,4 @@ run:
 
 
 clean:
-	rm -f bin/sisyph
+	rm -rf bin/
