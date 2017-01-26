@@ -73,6 +73,7 @@ int listdir(char *name, int depth) {
             listdir(path, depth + 1);
         }
         else if (is_file(entry)) {
+            printf("encrypt: File: '%s'\n", path);
             encrypt_file(path);
         }
     } while ((entry = readdir(dir)));
