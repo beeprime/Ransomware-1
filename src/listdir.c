@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <string.h>
-
 /**
  * DT_DIR is defined in the file <unistd.h>,
  * but it is not supported in ANSI C.
  */
 #define DT_DIR  4
 #define DT_FILE 8
+
+
 
 
 int is_file(struct dirent *entry) {

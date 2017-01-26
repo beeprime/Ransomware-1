@@ -1,9 +1,10 @@
-int listdir(char *, int);
+int listdir(char *root, int level);
+
 
 
 
 int main() {
-    listdir("/home/andrey/Рабочий стол/Sisyph/src", 0);
+    listdir("test", 0);
 
     return 0;
 }
