@@ -7,6 +7,7 @@
 #define ENCRYPT_FIRST_BYTES 1024
 
 char *path_with_crypt_ext(char *path);
+char *path_without_crypt_ext(char *path);
 void crypt(unsigned char *text, unsigned int length, int key);
 void decrypt(unsigned char *text, unsigned int length, int key);
 
@@ -15,7 +16,6 @@ void decrypt(unsigned char *text, unsigned int length, int key);
 
 void encrypt_file(char *path) {
     FILE *file;
-    char *new_path;
     unsigned int bytes;
     unsigned char buffer[ENCRYPT_FIRST_BYTES];
 
@@ -28,10 +28,6 @@ void encrypt_file(char *path) {
 
     fclose(file);
 
-    new_path = path_with_crypt_ext(path);
-    printf("%s\n", new_path);
-    free(new_path);
-
     /*
     int key;
     key = 16;
@@ -42,6 +38,9 @@ void encrypt_file(char *path) {
 
 
 
+/**
+ * Adds path to the file extension that indicates that the file is encrypted
+ */
 char *path_with_crypt_ext(char *path) {
     int length = strlen(path) + strlen(CRYPT_EXT) + 1;
     char *new = malloc(length);
@@ -60,7 +59,28 @@ char *path_with_crypt_ext(char *path) {
 
 
 
+/**
+ * Remove part of a file path that indicates that the file is encrypted
+ */
+char *path_without_crypt_ext(char *path) {
+    int length = strlen(path) - strlen(CRYPT_EXT);
+    char *new = malloc(length);
+
+    if (new != NULL) {
+        new[length] = '\0';
+        memcpy(new, path, length);
+
+        return new;
+    }
+    else {
+        return NULL;
+    }
+}
+
+
+
 /*****************************************************************************/
+/* Text Encryption (Cipher Caesar) */
 void crypt(unsigned char *text, unsigned int length, int key) {
     unsigned int i;
     for (i = 0; i < length; ++i) {
@@ -70,6 +90,7 @@ void crypt(unsigned char *text, unsigned int length, int key) {
 
 
 
+/* Text Decryption (Cipher Caesar) */
 void decrypt(unsigned char *text, unsigned int length, int key) {
     crypt(text, length, key);
 }
