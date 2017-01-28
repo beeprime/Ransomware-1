@@ -9,7 +9,6 @@ void decrypt(unsigned char *text, unsigned int length, int key);
 
 
 void encrypt_file(char *path) {
-    int key;
     FILE *file;
     unsigned int bytes;
     unsigned char buffer[ENCRYPT_FIRST_BYTES];
@@ -24,6 +23,7 @@ void encrypt_file(char *path) {
     fclose(file);
 
     /*
+    int key;
     key = 16;
     crypt(buffer, bytes, key);
     decrypt(buffer, bytes, key);

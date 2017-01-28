@@ -4,6 +4,13 @@
 #include <stdint.h>
 
 #define DEBUG
+/*
+#undef DEBUG
+*/
+
+#ifdef DEBUG
+#include <stdio.h>
+#endif
 
 #define FALSE   0
 #define TRUE    1
