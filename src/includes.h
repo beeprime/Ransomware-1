@@ -12,8 +12,11 @@
 #include <stdio.h>
 #endif
 
-#define FALSE   0
-#define TRUE    1
-typedef char BOOL;
+typedef enum bool {
+    FALSE,
+    TRUE
+} bool;
+
+#define CRYPT_EXT ".sisyph"
 
 #endif
