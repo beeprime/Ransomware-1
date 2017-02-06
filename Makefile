@@ -7,6 +7,7 @@ main:
 	mkdir -p bin
 	$(CC) $(DEBUG) $(FLAGS) src/main.c src/listdir.c src/encrypt.c src/includes.h -o bin/sisyph
 
+
 run:
 	./bin/sisyph
 

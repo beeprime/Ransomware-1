@@ -8,6 +8,7 @@
 
 char *path_with_crypt_ext(char *path);
 char *path_without_crypt_ext(char *path);
+void total_removal_of_file_zeros(char *path);
 void crypt(unsigned char *text, unsigned int length, int key);
 void decrypt(unsigned char *text, unsigned int length, int key);
 
@@ -74,6 +75,28 @@ char *path_without_crypt_ext(char *path) {
     }
     else {
         return NULL;
+    }
+}
+
+
+
+/**
+ * Complete removal of the file and write it with zeros
+ */
+void total_removal_of_file_zeros(char *path) {
+    FILE *file = fopen(path, "r+");
+
+    if (file != NULL) {
+        fseek(file, 1, SEEK_SET);
+        while (!feof(file)) {
+            fputc(0, file);
+            fgetc(file);
+        }
+
+        fclose(file);
+#ifndef DEBUG
+        remove(path);
+#endif
     }
 }
 

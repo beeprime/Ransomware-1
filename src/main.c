@@ -2,6 +2,7 @@
 
 
 int listdir(char *root, int level);
+void total_removal_of_file(char *path);
 
 
 
